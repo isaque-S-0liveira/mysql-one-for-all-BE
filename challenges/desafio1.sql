@@ -26,6 +26,7 @@ CREATE TABLE SpotifyClone.albuns(
     album_id INT PRIMARY KEY AUTO_INCREMENT,
     album VARCHAR(50),
     artista_id INT,
+    ano_lancamento YEAR NOT NULL, 
 	FOREIGN KEY (artista_id) REFERENCES artistas (artista_id)
 ) engine = InnoDB;
 
@@ -41,10 +42,12 @@ CREATE TABLE SpotifyClone.seguindo(
 CREATE TABLE SpotifyClone.musicas(
     musica_id INT PRIMARY KEY AUTO_INCREMENT,
     album_id INT,
+    artista_id INT,
     musica VARCHAR(50) NOT NULL,
     duracao INT NOT NULL,
     ano_lancamento YEAR NOT NULL,
-    FOREIGN KEY(album_id) REFERENCES albuns (album_id)
+    FOREIGN KEY(album_id) REFERENCES albuns (album_id),
+    FOREIGN KEY(artista_id) REFERENCES artistas (artista_id)
 ) engine = InnoDB;
 
 CREATE TABLE SpotifyClone.historico(
@@ -79,14 +82,14 @@ INSERT INTO usuario (usuario_id, nome_usuario, idade, plano_id, data_de_assinatu
 INSERT INTO usuario (usuario_id, nome_usuario, idade, plano_id, data_de_assinatura) VALUES ('9', 'Judith Butler', '45', '4', '2020-05-13');
 INSERT INTO usuario (usuario_id, nome_usuario, idade, plano_id, data_de_assinatura) VALUES ('10', 'Jorge Amado', '58', '4', '2017-02-17');
 
-INSERT INTO albuns (album_id, album) VALUES ('1', 'Renaissance');
-INSERT INTO albuns (album_id, album) VALUES ('2', 'Jazz');
-INSERT INTO albuns (album_id, album) VALUES ('3', 'Hot Space');
-INSERT INTO albuns (album_id, album) VALUES ('4', 'Falso Brilhante');
-INSERT INTO albuns (album_id, album) VALUES ('5', 'Vento de Maio');
-INSERT INTO albuns (album_id, album) VALUES ('6', 'QVVJFA?');
-INSERT INTO albuns (album_id, album) VALUES ('7', 'Somewhere Far Beyond');
-INSERT INTO albuns (album_id, album) VALUES ('8', 'I Put A Spell On You');
+INSERT INTO albuns (album_id, album, artista_id, ano_lancamento) VALUES ('1', 'Renaissance',1,2022);       
+INSERT INTO albuns (album_id, album, artista_id, ano_lancamento) VALUES ('2', 'Jazz',2,1978);
+INSERT INTO albuns (album_id, album, artista_id, ano_lancamento) VALUES ('3', 'Hot Space',2,1982);
+INSERT INTO albuns (album_id, album, artista_id, ano_lancamento) VALUES ('4', 'Falso Brilhante',3,1998);
+INSERT INTO albuns (album_id, album, artista_id, ano_lancamento) VALUES ('5', 'Vento de Maio',3,2001);
+INSERT INTO albuns (album_id, album, artista_id, ano_lancamento) VALUES ('6', 'QVVJFA?',4,2003);
+INSERT INTO albuns (album_id, album, artista_id, ano_lancamento) VALUES ('7', 'Somewhere Far Beyond',5,2007);
+INSERT INTO albuns (album_id, album, artista_id, ano_lancamento) VALUES ('8', 'I Put A Spell On You',6,2012);  
 
 
 INSERT INTO seguindo (usuario_id, artista_id) VALUES ('1', '1');
@@ -104,16 +107,17 @@ INSERT INTO seguindo (usuario_id, artista_id) VALUES ('7', '6');
 INSERT INTO seguindo (usuario_id, artista_id) VALUES ('9', '3');
 INSERT INTO seguindo (usuario_id, artista_id) VALUES ('10', '2');
 
-INSERT INTO musicas (musica_id, musica, duracao, ano_lancamento, album_id) VALUES (1,"BREAK MY SOUL", '279', '2022',1);
-INSERT INTO musicas (musica_id, musica, duracao, ano_lancamento, album_id) VALUES (2,"VIRGO\'S GROOVE",  '369', '2022',1);
-INSERT INTO musicas (musica_id, musica, duracao, ano_lancamento, album_id) VALUES (3,"ALIEN SUPERSTAR", '116', '2022',1);
-INSERT INTO musicas (musica_id, musica, duracao, ano_lancamento, album_id) VALUES (4,"Don\'t Stop Me Now", '203', '1978',2);
-INSERT INTO musicas (musica_id, musica, duracao, ano_lancamento, album_id) VALUES (5,"Under Pressure", '152', '1982',3);
-INSERT INTO musicas (musica_id, musica, duracao, ano_lancamento, album_id) VALUES (6,"Como Nossos Pais", '105', '1998',4);
-INSERT INTO musicas (musica_id, musica, duracao, ano_lancamento, album_id) VALUES (7,"O Medo de Amar é o Medo de Ser Livre", '207', '2001',5);
-INSERT INTO musicas (musica_id, musica, duracao, ano_lancamento, album_id) VALUES (8,"Samba em Paris", '267', '2003',6);
-INSERT INTO musicas (musica_id, musica, duracao, ano_lancamento, album_id) VALUES (9,"The Bard\'s Song", '244', '2007',7);
-INSERT INTO musicas (musica_id, musica, duracao, ano_lancamento, album_id) VALUES (10,"Feeling Good", '100', '2012',8);
+
+INSERT INTO musicas (musica_id, artista_id, musica, duracao, ano_lancamento, album_id) VALUES (1,1,"BREAK MY SOUL", '279', '2022',1);
+INSERT INTO musicas (musica_id, artista_id, musica, duracao, ano_lancamento, album_id) VALUES (2,1,"VIRGO\'S GROOVE",  '369', '2022',1);
+INSERT INTO musicas (musica_id, artista_id, musica, duracao, ano_lancamento, album_id) VALUES (3,1,"ALIEN SUPERSTAR", '116', '2022',1);
+INSERT INTO musicas (musica_id, artista_id, musica, duracao, ano_lancamento, album_id) VALUES (4,2,"Don\'t Stop Me Now", '203', '1978',2);
+INSERT INTO musicas (musica_id, artista_id, musica, duracao, ano_lancamento, album_id) VALUES (5,2,"Under Pressure", '152', '1982',3);
+INSERT INTO musicas (musica_id, artista_id, musica, duracao, ano_lancamento, album_id) VALUES (6,3,"Como Nossos Pais", '105', '1998',4);
+INSERT INTO musicas (musica_id, artista_id, musica, duracao, ano_lancamento, album_id) VALUES (7,3,"O Medo de Amar é o Medo de Ser Livre", '207', '2001',5);
+INSERT INTO musicas (musica_id, artista_id, musica, duracao, ano_lancamento, album_id) VALUES (8,4,"Samba em Paris", '267', '2003',6);
+INSERT INTO musicas (musica_id, artista_id, musica, duracao, ano_lancamento, album_id) VALUES (9,5,"The Bard\'s Song", '244', '2007',7);
+INSERT INTO musicas (musica_id, artista_id, musica, duracao, ano_lancamento, album_id) VALUES (10,6,"Feeling Good", '100', '2012',8);
 
 
 INSERT INTO historico (usuario_id, musica_id, data_de_reproducao) VALUES (1, 8, "2022-02-28 10:45:55");
@@ -132,3 +136,5 @@ INSERT INTO historico (usuario_id, musica_id, data_de_reproducao) VALUES (7, 4, 
 INSERT INTO historico (usuario_id, musica_id, data_de_reproducao) VALUES (8, 4, "2012-03-17 14:56:41");
 INSERT INTO historico (usuario_id, musica_id, data_de_reproducao) VALUES (9, 9, "2022-02-24 21:14:22");
 INSERT INTO historico (usuario_id, musica_id, data_de_reproducao) VALUES (10, 3, "2015-12-13 08:30:22");
+
+
